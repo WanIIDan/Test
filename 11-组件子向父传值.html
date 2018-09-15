@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .my-btn{
+            width: 100px;
+            height: 50px;
+            border-radius: 4px;
+            background: #409eff;
+            color: #fff;
+            line-height: 50px;
+            text-align: center;
+            border: none;
+            outline: none;
+        }
+        .my-btn:active{
+            background: #3a8ee6;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- native：监听组件根标签事件 -->
+        <my-btn text="切换" @click.native="handleClick"></my-btn>
+        <my-btn v-bind:text="btnText" @to-you="getChild"></my-btn>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+
+    const myBtn = {
+        props: {
+            text: {
+                type: String
+            }
+        },
+        template: `<button class="my-btn" @click="toFather">{{text}}</button>`,
+        data(){
+            return {
+                child: '来自子组件内部的值'
+            }
+        },
+        methods: {
+            toFather(){
+                // $emit触发一个自定义事件
+                this.$emit('to-you',this.child)
+            }
+        }
+    }
+
+    Vue.component("my-btn",myBtn)
+    var app = new Vue({
+        el: "#app",
+        data: {
+            btnText: "我的按钮"
+        },
+        methods: {
+            handleClick(){
+                this.btnText = "你的按钮"
+            },
+            getChild(child){
+                console.log(child)
+            }
+        }
+    })
+</script>
+</html>

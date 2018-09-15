@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>父组件的值是{{num1}}</h1>
+        <button @click="parentAdd">++++</button>
+        <!-- <my-component v-bind:my-num="num1" @add-parent="addSelf" @sub-parent="subSelf"></my-component> -->
+        <my-component :value="num1" @input="changeValue"></my-component>
+        <my-component v-model="num1"></my-component>
+        <my-component></my-component>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+
+    const myComponent = {
+        props: {
+            "my-num": {
+                type: Number
+            },
+            value: {
+                type: Number
+            }
+        },
+        template: `
+            <div>
+                <button @click="handleSub">-</button>
+                <strong>{{num}}</strong>
+                <button @click="handleAdd">+</button>
+            </div>
+        `,
+        data(){
+            return {
+                num: this.value
+            }
+        },
+        methods: {
+            handleSub(){
+                // this.$emit("sub-parent")
+                this.num--
+                this.$emit("input",this.num)
+            },
+            handleAdd(){
+                // this.$emit("add-parent")
+                this.num++
+                this.$emit("input",this.num)
+            }
+        },
+        watch: {
+            myNum(val){
+                this.num = val
+            },
+            value(val){
+                this.num = val
+            }
+        }
+    }
+
+    var app = new Vue({
+        components: {
+            myComponent
+        },
+        el: "#app",
+        data: {
+            num1: 10,
+        },
+        methods: {
+            parentAdd(){
+                this.num1++
+            },
+            addSelf(){
+                this.num1++
+            },
+            subSelf(){
+                this.num1--
+            },
+            changeValue(value){
+                this.num1 = value
+            }
+        }
+    })
+</script>
+</html>

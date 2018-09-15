@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-container></my-container>
+        <my-container></my-container>
+        <my-container></my-container>
+        <my-container></my-container>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+
+    const myContainer = {
+        template: `
+            <div>
+                <button @click="handleSub">-</button>
+                <strong>{{num}}</strong>
+                <button @click="handleAdd">+</button>
+            </div>`,
+        // 组件内部的data必须是个函数，返回一个对象，在对象里声明属性
+        data(){
+            return {
+                // 状态独立
+                num: 0
+            }
+        },
+        methods: {
+            handleSub(){
+                this.num--
+            },
+            handleAdd(){
+                this.num++
+            }
+        }
+    }
+
+    var app = new Vue({
+        components: {
+            myContainer
+        },
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+
+        }
+    })
+</script>
+</html>

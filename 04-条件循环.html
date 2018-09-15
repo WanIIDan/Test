@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <button v-on:click="handleClick">切换显示</button> -->
+        <button @click="handleClick">切换显示</button>
+        <!-- v-if会删除dom节点，然后再重新渲染dom树，浪费性能
+             而v-show只是切换了display属性，隐藏为none -->
+        <div class="box" v-show="isShow"></div>
+        <!-- <div class="box" v-if="isShow"></div> -->
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            isShow: true
+        },
+        methods: {
+            handleClick(){
+                this.isShow = !this.isShow
+            }
+        }
+    })
+</script>
+</html>
