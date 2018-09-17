@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(val,index) in items">{{index}}----{{val}}</li>
+            <br>
+            <li v-for="(val,key) in dog">{{key}}----{{val}}</li>
+        </ul>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            items: ["html","css","js","vue"],
+            dog: {
+                name: "哮天犬",
+                age: 500
+            }
+        }
+    })
+</script>
+</html>

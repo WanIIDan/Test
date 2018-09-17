@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 得到cookie
+    function getCookie(){
+        let obj = {}
+        let cookieString = document.cookie
+        let cookieArr = cookieString.split(';')
+        console.log(cookieArr)
+        cookieArr.forEach(item=>{
+            let tempArr = item.split('=')
+            console.log(tempArr)
+            let key = tempArr[0].trim()
+            let value = tempArr[1]
+            obj[key] = value
+        })
+        return obj
+    }
+    let cookieObj = getCookie()
+    console.log(cookieObj.name)
+
+    // 设置cookie
+    function setCookie(key,value,expires){
+        if(!expires){
+            document.cookie = `${key}=${value}`
+        }else{
+            let date = new Date()
+            let unix = date.getTime()
+            unix = expires * 1000 + unix
+            let newDateStr = new Date(unix)
+            document.cookie = `${key}=${value};expires=${newDateStr}`
+        }
+    }
+
+    setCookie('start','nihao','60')
+
+    // 删除cookie
+    function removeCookie(key){
+        let value = ''
+        let date = new Date().getTime()
+        date = date - 1000
+        let dateStr = new Date(date).toUTCString()
+        document.cookie = `${key}=${value};expires=${newDateStr}`
+    }
+
+    setTimeout(()=>{
+        removeCookie('start')
+    },5000)
+
+</script>
+</html>

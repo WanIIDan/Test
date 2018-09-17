@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        [v-cloak]{display: none;}
+    </style>
+</head>
+<body>
+
+<!-- 
+    v-cloak和css规则[v-cloak]{display: none}一起使用，
+    这个指令隐藏未编译的标签，直到实例准备完毕。作用就是防止{{}}表达式闪烁。 
+-->
+
+    <div id="app">
+        <h1 v-cloak>{{name}}</h1>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var vue = new Vue({
+        el: "#app",
+        data: {
+            name: "wangcai"
+        }
+    })
+</script>
+</html>
